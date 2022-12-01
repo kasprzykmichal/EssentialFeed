@@ -10,6 +10,7 @@
 		2077FE6229395E26007FABBF /* EssentialFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = 2077FE6129395E26007FABBF /* EssentialFeed.docc */; };
 		2077FE6329395E26007FABBF /* EssentialFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 2077FE6029395E26007FABBF /* EssentialFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2077FE6A29395E4C007FABBF /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077FE6929395E4C007FABBF /* FeedItem.swift */; };
+		2077FE6C29395ED9007FABBF /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077FE6B29395ED9007FABBF /* FeedLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		2077FE6029395E26007FABBF /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
 		2077FE6129395E26007FABBF /* EssentialFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = EssentialFeed.docc; sourceTree = "<group>"; };
 		2077FE6929395E4C007FABBF /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		2077FE6B29395ED9007FABBF /* FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 				2077FE6029395E26007FABBF /* EssentialFeed.h */,
 				2077FE6129395E26007FABBF /* EssentialFeed.docc */,
 				2077FE6929395E4C007FABBF /* FeedItem.swift */,
+				2077FE6B29395ED9007FABBF /* FeedLoader.swift */,
 			);
 			path = EssentialFeed;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2077FE6C29395ED9007FABBF /* FeedLoader.swift in Sources */,
 				2077FE6A29395E4C007FABBF /* FeedItem.swift in Sources */,
 				2077FE6229395E26007FABBF /* EssentialFeed.docc in Sources */,
 			);
