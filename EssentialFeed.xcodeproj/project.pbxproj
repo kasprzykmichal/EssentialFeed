@@ -51,12 +51,20 @@
 		2077FE5F29395E26007FABBF /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
+				2077FE6D29395F92007FABBF /* Feed Feature */,
 				2077FE6029395E26007FABBF /* EssentialFeed.h */,
 				2077FE6129395E26007FABBF /* EssentialFeed.docc */,
+			);
+			path = EssentialFeed;
+			sourceTree = "<group>";
+		};
+		2077FE6D29395F92007FABBF /* Feed Feature */ = {
+			isa = PBXGroup;
+			children = (
 				2077FE6929395E4C007FABBF /* FeedItem.swift */,
 				2077FE6B29395ED9007FABBF /* FeedLoader.swift */,
 			);
-			path = EssentialFeed;
+			path = "Feed Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
