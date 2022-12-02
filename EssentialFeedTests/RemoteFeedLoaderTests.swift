@@ -9,13 +9,13 @@ import XCTest
 import EssentialFeed
 
 class RemoteFeedLoaderTests: XCTestCase {
-    func testInitDoesNotRequestDataFromURL() {
+    func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
         
         XCTAssertNil(client.requestedURL)
     }
     
-    func testLoadRequestDataFromURL() {
+    func test_load_requestsDataFromURL() {
         let url = URL(string: "https://a-given-url.com")!
         let (sut, client) = makeSUT(url: url)
         
