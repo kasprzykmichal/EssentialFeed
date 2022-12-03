@@ -76,6 +76,5 @@ private class FeedItemsMapper {
         let root = try JSONDecoder().decode(Root.self, from: data)
         
         return root.items.map({ $0.item })
-        
     }
 }
