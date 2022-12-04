@@ -16,6 +16,7 @@
 		2077FE7629396154007FABBF /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2077FE5D29395E26007FABBF /* EssentialFeed.framework */; };
 		2077FE7D293A5048007FABBF /* RemoteFeedLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077FE7C293A5048007FABBF /* RemoteFeedLoaderTests.swift */; };
 		2077FE80293A6634007FABBF /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077FE7F293A6634007FABBF /* RemoteFeedLoader.swift */; };
+		20E93A97293C8D3700D64087 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E93A96293C8D3700D64087 /* URLSessionHTTPClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		2077FE7229396154007FABBF /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2077FE7C293A5048007FABBF /* RemoteFeedLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoaderTests.swift; sourceTree = "<group>"; };
 		2077FE7F293A6634007FABBF /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
+		20E93A96293C8D3700D64087 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				2077FE7C293A5048007FABBF /* RemoteFeedLoaderTests.swift */,
+				20E93A96293C8D3700D64087 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2077FE7D293A5048007FABBF /* RemoteFeedLoaderTests.swift in Sources */,
+				20E93A97293C8D3700D64087 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
