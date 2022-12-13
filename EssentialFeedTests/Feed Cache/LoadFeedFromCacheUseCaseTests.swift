@@ -50,7 +50,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         })
     }
 
-    func test_load_deliversCachedNoImagesOnSevenDaysOldCache() {
+    func test_load_deliversNoImagesOnSevenDaysOldCache() {
         let fixedCurrentDate = Date()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         let feed = uniqueImageFeed()
