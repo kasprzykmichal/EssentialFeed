@@ -25,7 +25,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
     func test_load_failsOnRetrievalError() {
         let (sut, store) = makeSUT()
         let retrievalError = anyNSError()
-        var exp = expectation(description: "Wait for load completion")
+        let exp = expectation(description: "Wait for load completion")
         var receivedError: Error?
         sut.load { error in
             receivedError = error
