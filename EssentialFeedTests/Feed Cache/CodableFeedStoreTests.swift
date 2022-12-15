@@ -160,7 +160,9 @@ class CodableFeedStoreTests: XCTestCase {
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
         
-        deleteCache(sut)
+        let deletionError = deleteCache(sut)
+        
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
         expect(sut, toRetrieve: .empty)
     }
     
@@ -177,7 +179,6 @@ class CodableFeedStoreTests: XCTestCase {
         let exp = expectation(description: "Wait for cache deletion")
         var receivedError: Error?
         sut.deleteCachedFeed { error in
-            XCTAssertNil(receivedError, "Expected empty cache deletion to succeed", file: file, line: line)
             receivedError = error
             exp.fulfill()
         }
