@@ -186,7 +186,7 @@ class CodableFeedStoreTests: XCTestCase {
     }
 
     func test_delete_deliversErrorOnDeletionError() {
-        let invalidStoreURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let invalidStoreURL = cachesDirectory()
         let sut = makeSUT(storeURL: invalidStoreURL)
 
         let deletionError = deleteCache(sut)
@@ -252,7 +252,11 @@ class CodableFeedStoreTests: XCTestCase {
     }
     
     private func testSpecificStoreURL() -> URL {
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+        return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
+    }
+
+    private func cachesDirectory() -> URL {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
 
     private func setupEmptyStoreState() {
