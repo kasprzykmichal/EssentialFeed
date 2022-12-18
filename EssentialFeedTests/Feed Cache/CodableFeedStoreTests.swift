@@ -112,9 +112,11 @@ class CodableFeedStoreTests: XCTestCase {
     func test_delete_deliversErrorOnDeletionError() {
         let noDeletePermissionURL = cachesDirectory()
         let sut = makeSUT(storeURL: noDeletePermissionURL)
-
+        
         let deletionError = deleteCache(sut)
+        
         XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
+        expect(sut, toRetrieve: .empty)
     }
 
     func test_storeSideEffects_runSerially() {
@@ -156,13 +158,13 @@ class CodableFeedStoreTests: XCTestCase {
     @discardableResult
     private func deleteCache(_ sut: FeedStore, file: StaticString = #file, line: UInt = #line) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
-        var receivedError: Error?
-        sut.deleteCachedFeed { error in
-            receivedError = error
+        var deletionError: Error?
+        sut.deleteCachedFeed { receivedDeletionError in
+            deletionError = receivedDeletionError
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
-        return receivedError
+        return deletionError
     }
 
     @discardableResult
