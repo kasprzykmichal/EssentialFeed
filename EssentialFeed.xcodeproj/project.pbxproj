@@ -144,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				205A9710294F604B00BAB3D2 /* CoreDataFeedStore.swift */,
+				205A96FF294BE27500BAB3D2 /* CodableFeedStore.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -251,7 +252,6 @@
 				201F449E2949E6B700F82EA4 /* FeedCachePolicy.swift */,
 				20D01C3029401D6B00378E44 /* FeedStore.swift */,
 				20C028FD294221950002341E /* LocalFeedImage.swift */,
-				205A96FF294BE27500BAB3D2 /* CodableFeedStore.swift */,
 				205A9712294F617400BAB3D2 /* FeedStore.xcdatamodeld */,
 			);
 			path = "Feed Cache";
