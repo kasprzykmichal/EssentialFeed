@@ -16,7 +16,6 @@ final class FeedViewControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        
         XCTAssertEqual(sut.title, "My Feed")
     }
     
