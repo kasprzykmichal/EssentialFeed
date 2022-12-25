@@ -37,7 +37,7 @@ final class FeedImageCellController {
         cell.onRetry = viewModel.loadImageData
         
         viewModel.onImageLoad = { [weak cell] image in
-            cell?.feedImageView.image = image
+            cell?.feedImageView.setImageAnimated(image)
         }
     
         viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
