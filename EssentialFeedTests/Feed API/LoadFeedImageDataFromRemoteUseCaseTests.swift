@@ -14,13 +14,26 @@ class RemoteFeedImageDataLoader {
     enum Error: Swift.Error {
         case invalidData
     }
+
+    private struct HTTPTaskWrapper: FeedImageDataLoaderTask {
+        let wrapped: HTTPClientTask
+        
+        init(wrapped: HTTPClientTask) {
+            self.wrapped = wrapped
+        }
+        
+        func cancel() {
+            wrapped.cancel()
+        }
+    }
     
     init(client: HTTPClient) {
         self.client = client
     }
 
-    func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) {
-        client.get(from: url) { [weak self] result in
+    @discardableResult
+    func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
+        return HTTPTaskWrapper(wrapped: client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             switch result {
             case let .failure(error):
@@ -32,7 +45,7 @@ class RemoteFeedImageDataLoader {
                     completion(.failure(Error.invalidData))
                 }
             }
-        }
+        })
     }
 }
 
