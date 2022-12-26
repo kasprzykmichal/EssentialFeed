@@ -11,6 +11,10 @@ import EssentialFeed
 class RemoteFeedImageDataLoader {
     private let client: HTTPClient
     
+    enum Error: Swift.Error {
+        case invalidData
+    }
+    
     init(client: HTTPClient) {
         self.client = client
     }
@@ -20,8 +24,8 @@ class RemoteFeedImageDataLoader {
             switch result {
             case let .failure(error):
                 completion(.failure(error))
-            case let .success:
-                break
+            case .success:
+                completion(.failure(Error.invalidData))
             }
         }
     }
@@ -60,6 +64,18 @@ final class LoadFeedImageDataFromRemoteUseCaseTests: XCTestCase {
              client.complete(with: clientError)
          })
      }
+
+    func test_loadImageDataFromURL_deliversInvalidDataErrorOnNon200HTTPResponse() {
+         let (sut, client) = makeSUT()
+
+         let samples = [199, 201, 300, 400, 500]
+
+         samples.enumerated().forEach { index, code in
+             expect(sut, toCompleteWith: failure(.invalidData), when: {
+                 client.complete(withStatusCode: code, data: anyData(), at: index)
+             })
+         }
+     }
     
     // MARK: - Helpers
     
@@ -69,6 +85,14 @@ final class LoadFeedImageDataFromRemoteUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(client, file: file, line: line)
         return (sut, client)
+    }
+
+    private func anyData() -> Data {
+        return Data("any data".utf8)
+    }
+
+    private func failure(_ error: RemoteFeedImageDataLoader.Error) -> FeedImageDataLoader.Result {
+        return .failure(error)
     }
 
     private func expect(_ sut: RemoteFeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
