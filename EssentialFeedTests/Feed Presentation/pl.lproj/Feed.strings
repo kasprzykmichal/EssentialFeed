@@ -1,0 +1,11 @@
+/* 
+  Feed.strings
+  EssentialFeed
+
+  Created by Michał Kasprzyk on 26/12/2022.
+  
+*/
+
+
+"FEED_VIEW_TITLE" = "Moja Tablica";
+"FEED_VIEW_CONNECTION_ERROR" = "Nie można nawiązać połączenia z serwerem";
