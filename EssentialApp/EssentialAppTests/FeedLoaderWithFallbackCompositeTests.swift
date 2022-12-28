@@ -6,28 +6,8 @@
 //
 
 import XCTest
+import EssentialApp
 import EssentialFeed
-
-class FeedLoaderWithFallbackComposite: FeedLoader {
-    private let primary: FeedLoader
-    private let fallback: FeedLoader
-    
-    init(primary: FeedLoader, fallback: FeedLoader) {
-        self.primary = primary
-        self.fallback = fallback
-    }
-
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        primary.load { [weak self] primaryResult in
-            switch primaryResult {
-            case .success:
-                completion(primaryResult)
-            case .failure:
-                self?.fallback.load(completion: completion)
-            }
-        }
-    }
-}
 
 final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
     func test_load_deliversPrimaryFeedOnPrimaryLoaderSuccess() {
