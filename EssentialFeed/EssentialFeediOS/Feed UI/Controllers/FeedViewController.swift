@@ -13,7 +13,7 @@ public protocol FeedViewControllerDelegate {
 }
 
 final public class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching, FeedLoadingView, FeedErrorView {
-    @IBOutlet private(set) var errorView: ErrorView?
+    @IBOutlet private(set) public var errorView: ErrorView?
     
     public var delegate: FeedViewControllerDelegate?
         
