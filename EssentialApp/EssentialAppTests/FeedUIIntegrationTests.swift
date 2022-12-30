@@ -385,7 +385,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     }
 }
 
-private extension FeedViewController {
+extension FeedViewController {
     func simulateUserInitiaderFeedReload() {
         refreshControl?.simulatePullToRefresh()
     }
@@ -393,6 +393,10 @@ private extension FeedViewController {
     @discardableResult
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         return feedImageView(at: index) as? FeedImageCell
+    }
+
+    func renderedFeedImageData(at index: Int) -> Data? {
+        return simulateFeedImageViewVisible(at: 0)?.renderedImage
     }
     
     @discardableResult
@@ -438,7 +442,7 @@ private extension FeedViewController {
     }
 }
 
-private extension FeedImageCell {
+extension FeedImageCell {
     var isShowingLocation: Bool {
         return !locationContainer.isHidden
     }
