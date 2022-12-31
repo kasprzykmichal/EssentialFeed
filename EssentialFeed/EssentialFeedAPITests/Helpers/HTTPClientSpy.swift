@@ -7,6 +7,7 @@
 
 import Foundation
 import EssentialFeed
+import EssentialFeedAPI
 
 class HTTPClientSpy: HTTPClient {
     private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()

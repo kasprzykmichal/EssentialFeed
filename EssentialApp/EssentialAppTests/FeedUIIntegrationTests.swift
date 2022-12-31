@@ -343,7 +343,7 @@ final class FeedUIIntegrationTests: XCTestCase {
 
     private func assertThat(_ sut: FeedViewController, isRendering feed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
         sut.tableView.layoutIfNeeded()
-        RunLoop.main.run(until: Date())
+        executeRunLoopToCleanUpReferences()
         guard sut.numberOfRenderedFeedImageViews() == feed.count else {
             return XCTFail("Expected \(feed.count) images, got \(sut.numberOfRenderedFeedImageViews()) instead", file: file, line: line)
         }
@@ -351,6 +351,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         feed.enumerated().forEach { index, image in
             assertThat(sut, hasViewConfiguredFor: image, at: index, file: file, line: line)
         }
+        executeRunLoopToCleanUpReferences()
     }
 
     private func assertThat(_ sut: FeedViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #file, line: UInt = #line) {
@@ -374,6 +375,10 @@ final class FeedUIIntegrationTests: XCTestCase {
 
     private func anyFeedImageData() -> Data {
         return UIImage.make(withColor: .red).pngData()!
+    }
+
+    private func executeRunLoopToCleanUpReferences() {
+        RunLoop.current.run(until: Date())
     }
     
     class LoaderSpy: FeedLoader, FeedImageDataLoader {
