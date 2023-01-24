@@ -8,4 +8,4 @@
 
 
 "FEED_VIEW_TITLE" = "Moja Tablica";
-"FEED_VIEW_CONNECTION_ERROR" = "Nie można nawiązać połączenia z serwerem";
+"GENERIC_CONNECTION_ERROR" = "Nie można nawiązać połączenia z serwerem";
