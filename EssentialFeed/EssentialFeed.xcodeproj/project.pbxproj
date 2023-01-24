@@ -107,6 +107,7 @@
 		20FBDD502980880A004CEA7C /* ImageCommentsLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FBDD4F2980880A004CEA7C /* ImageCommentsLocalizationTests.swift */; };
 		20FBDD5129808836004CEA7C /* ImageComments.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20FBDD5329808836004CEA7C /* ImageComments.strings */; };
 		20FBDD5629808CAD004CEA7C /* ImageCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FBDD5529808CAD004CEA7C /* ImageCommentViewModel.swift */; };
+		20FBDD5829808CDB004CEA7C /* ImageCommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FBDD5729808CDB004CEA7C /* ImageCommentsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +286,7 @@
 		20FBDD5229808836004CEA7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ImageComments.strings; sourceTree = "<group>"; };
 		20FBDD5429808839004CEA7C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/ImageComments.strings; sourceTree = "<group>"; };
 		20FBDD5529808CAD004CEA7C /* ImageCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentViewModel.swift; sourceTree = "<group>"; };
+		20FBDD5729808CDB004CEA7C /* ImageCommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -761,6 +763,7 @@
 			children = (
 				20FBDD4B298086CE004CEA7C /* ImageCommentsPresenter.swift */,
 				20FBDD5529808CAD004CEA7C /* ImageCommentViewModel.swift */,
+				20FBDD5729808CDB004CEA7C /* ImageCommentsViewModel.swift */,
 				20FBDD5329808836004CEA7C /* ImageComments.strings */,
 			);
 			path = "Image Comments Presentation";
@@ -1149,6 +1152,7 @@
 				20A4BAA3295B15DA00778F3A /* CoreDataFeedStore+FeedStore.swift in Sources */,
 				205A9718294F70A600BAB3D2 /* CoreDataHelpers.swift in Sources */,
 				200081F42954B1AE000AAEEB /* FeedImageDataLoaderTask.swift in Sources */,
+				20FBDD5829808CDB004CEA7C /* ImageCommentsViewModel.swift in Sources */,
 				205A9711294F604B00BAB3D2 /* CoreDataFeedStore.swift in Sources */,
 				20A4BA95295AF67A00778F3A /* FeedImageDataStore.swift in Sources */,
 				203BDE78295DA44900C3D650 /* FeedImageDataCache.swift in Sources */,

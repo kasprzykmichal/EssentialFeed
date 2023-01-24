@@ -7,14 +7,6 @@
 
 import Foundation
 
-public struct ImageCommentsViewModel: Equatable {
-    public let comments: [ImageCommentViewModel]
-    
-    public init(comments: [ImageCommentViewModel]) {
-        self.comments = comments
-    }
-}
-
 public class ImageCommentsPresenter {
     public static var title: String {
         return NSLocalizedString("IMAGE_COMMENTS_VIEW_TITLE",
