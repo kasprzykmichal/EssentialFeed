@@ -106,6 +106,7 @@
 		20FBDD4C298086CE004CEA7C /* ImageCommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FBDD4B298086CE004CEA7C /* ImageCommentsPresenter.swift */; };
 		20FBDD502980880A004CEA7C /* ImageCommentsLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FBDD4F2980880A004CEA7C /* ImageCommentsLocalizationTests.swift */; };
 		20FBDD5129808836004CEA7C /* ImageComments.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20FBDD5329808836004CEA7C /* ImageComments.strings */; };
+		20FBDD5629808CAD004CEA7C /* ImageCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FBDD5529808CAD004CEA7C /* ImageCommentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,6 +284,7 @@
 		20FBDD4F2980880A004CEA7C /* ImageCommentsLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsLocalizationTests.swift; sourceTree = "<group>"; };
 		20FBDD5229808836004CEA7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ImageComments.strings; sourceTree = "<group>"; };
 		20FBDD5429808839004CEA7C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/ImageComments.strings; sourceTree = "<group>"; };
+		20FBDD5529808CAD004CEA7C /* ImageCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -758,6 +760,7 @@
 			isa = PBXGroup;
 			children = (
 				20FBDD4B298086CE004CEA7C /* ImageCommentsPresenter.swift */,
+				20FBDD5529808CAD004CEA7C /* ImageCommentViewModel.swift */,
 				20FBDD5329808836004CEA7C /* ImageComments.strings */,
 			);
 			path = "Image Comments Presentation";
@@ -1140,6 +1143,7 @@
 				201C6856295F5A8800A80643 /* FeedImagePresenter.swift in Sources */,
 				20D01C3129401D6B00378E44 /* FeedStore.swift in Sources */,
 				20A4BA7B2959CE1B00778F3A /* ResouceLoadingView.swift in Sources */,
+				20FBDD5629808CAD004CEA7C /* ImageCommentViewModel.swift in Sources */,
 				20FBDD42298073FF004CEA7C /* ResourceErrorViewModel.swift in Sources */,
 				20A4BA792959CDFB00778F3A /* ResourceErrorView.swift in Sources */,
 				20A4BAA3295B15DA00778F3A /* CoreDataFeedStore+FeedStore.swift in Sources */,
