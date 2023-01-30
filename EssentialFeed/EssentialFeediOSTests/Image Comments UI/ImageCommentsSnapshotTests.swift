@@ -30,8 +30,12 @@ final class ImageCommentsSnapshotTests: XCTestCase {
         controller.tableView.showsHorizontalScrollIndicator = false
         return controller
     }
-
+    
     private func comments() -> [CellController] {
+        return commentControllers().map { CellController($0) }
+    }
+
+    private func commentControllers() -> [ImageCommentCellController] {
         return [
             ImageCommentCellController(
                 model: ImageCommentViewModel(
