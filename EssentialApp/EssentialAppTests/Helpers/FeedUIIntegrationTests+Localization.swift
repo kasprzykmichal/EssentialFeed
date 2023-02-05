@@ -17,6 +17,10 @@ extension FeedUIIntegrationTests {
     var feedTitle: String {
         FeedPresenter.title
     }
+
+    var commentsTitle: String {
+        ImageCommentsPresenter.title
+    }
     
     private class DummyView: ResourceView {
         func display(_ viewModel: Any) { }
