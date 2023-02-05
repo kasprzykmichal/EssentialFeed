@@ -12,7 +12,7 @@ import EssentialFeediOS
 import EssentialApp
 import Combine
 
-class CommentsUIIntegrationTests: FeedUIIntegrationTests {
+class CommentsUIIntegrationTests: XCTestCase {
     func test_commentsView_hasTitle() {
         let (sut, _) = makeSUT()
         
@@ -93,7 +93,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         wait(for: [exp], timeout: 1.0)
     }
 
-    override func test_errorView_doesNotRenderErrorOnLoad() {
+    func test_errorView_doesNotRenderErrorOnLoad() {
         let (sut, _) = makeSUT()
 
         sut.loadViewIfNeeded()
@@ -101,7 +101,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.errorMessage, nil)
     }
 
-    override func test_loadFeedCompletion_rendersErrorMessageOnError() {
+    func test_loadCommentsCompletion_rendersErrorMessageOnError() {
         let (sut, loader) = makeSUT()
 
         sut.loadViewIfNeeded()
@@ -111,7 +111,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.errorMessage, loadError)
     }
 
-    override func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+    func test_loadCommentsCompletion_rendersErrorMessageOnErrorUntilNextReload() {
         let (sut, loader) = makeSUT()
 
         sut.loadViewIfNeeded()
@@ -124,7 +124,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.errorMessage, nil)
     }
 
-    override func test_tapOnErrorView_hidesErrorMessage() {
+    func test_tapOnErrorView_hidesErrorMessage() {
         let (sut, loader) = makeSUT()
 
         sut.loadViewIfNeeded()
@@ -188,5 +188,19 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
             let error = NSError(domain: "an error", code: 0)
             requests[index].send(completion: .failure(error))
         }
+    }
+}
+
+extension CommentsUIIntegrationTests {
+    var loadError: String {
+        LoadResourcePresenter<Any, DummyView>.loadError
+    }
+
+    var commentsTitle: String {
+        ImageCommentsPresenter.title
+    }
+    
+    private class DummyView: ResourceView {
+        func display(_ viewModel: Any) { }
     }
 }
