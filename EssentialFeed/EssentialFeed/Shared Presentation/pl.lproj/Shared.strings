@@ -1,0 +1,9 @@
+/* 
+  Shared.strings
+  EssentialFeed
+
+  Created by Michał Kasprzyk on 24/01/2023.
+  
+*/
+
+"GENERIC_CONNECTION_ERROR" = "Nie można nawiązać połączenia z serwerem";

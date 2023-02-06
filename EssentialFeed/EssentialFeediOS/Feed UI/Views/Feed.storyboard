@@ -7,47 +7,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Feed View Controller-->
+        <!--List View Controller-->
         <scene sceneID="1QJ-gS-qZ1">
             <objects>
-                <tableViewController id="tnz-f9-BcQ" customClass="FeedViewController" customModule="EssentialFeediOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="tnz-f9-BcQ" customClass="ListViewController" customModule="EssentialFeediOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="580" sectionHeaderHeight="28" sectionFooterHeight="28" id="EUk-QV-Kpe">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="wNI-e5-pLj" customClass="ErrorView" customModule="EssentialFeediOS" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrw-XV-wwl">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Error Message" titleAlignment="center">
-                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </buttonConfiguration>
-                                    <connections>
-                                        <action selector="hideMessage" destination="wNI-e5-pLj" eventType="touchUpInside" id="kPB-vG-OvI"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemRedColor"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="qrw-XV-wwl" secondAttribute="trailing" id="MYp-cb-YLg"/>
-                                <constraint firstItem="qrw-XV-wwl" firstAttribute="top" secondItem="wNI-e5-pLj" secondAttribute="top" id="PGe-g3-Udz"/>
-                                <constraint firstAttribute="bottom" secondItem="qrw-XV-wwl" secondAttribute="bottom" id="cg0-c9-pkf"/>
-                                <constraint firstItem="qrw-XV-wwl" firstAttribute="leading" secondItem="wNI-e5-pLj" secondAttribute="leading" id="eow-6I-PYu"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="button" destination="qrw-XV-wwl" id="P5h-1I-5Sh"/>
-                            </connections>
-                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="v4c-7G-HPM">
-                            <rect key="frame" x="0.0" y="702" width="393" height="16"/>
+                            <rect key="frame" x="0.0" y="658" width="393" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FeedImageCell" rowHeight="580" id="WXz-Ig-HKH" customClass="FeedImageCell" customModule="EssentialFeediOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="94" width="393" height="580"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="580"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WXz-Ig-HKH" id="gee-lJ-AP3">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="580"/>
@@ -166,9 +140,6 @@ Location</string>
                             <action selector="refresh" destination="tnz-f9-BcQ" eventType="valueChanged" id="0EE-Zb-IXh"/>
                         </connections>
                     </refreshControl>
-                    <connections>
-                        <outlet property="errorView" destination="wNI-e5-pLj" id="rvr-4o-GeZ"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olB-ut-hjN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="ezj-Mk-iiW"/>
@@ -186,9 +157,6 @@ Location</string>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

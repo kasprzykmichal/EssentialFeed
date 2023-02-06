@@ -10,14 +10,15 @@ import UIKit
 import EssentialFeed
 import EssentialFeediOS
 import EssentialApp
+import Combine
 
-final class FeedUIIntegrationTests: XCTestCase {
+class FeedUIIntegrationTests: XCTestCase {
     func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
+        XCTAssertEqual(sut.title, feedTitle)
     }
     
     func test_loadFeedAction_requestFeedFromLoader() {
@@ -28,10 +29,10 @@ final class FeedUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.loadFeedCallCount, 1, "Expected a loading request once view is loaded")
         
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
         XCTAssertEqual(loader.loadFeedCallCount, 2, "Expected another loading request once user initiates a load")
     
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
         XCTAssertEqual(loader.loadFeedCallCount, 3, "Expected a third loading request once user initiates a load")
     }
 
@@ -44,7 +45,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(at: 0)
         XCTAssertEqual(sut.isShowingLoadingIndicator, false, "Expected no loading indicator once loading is completes sucessfuly")
 
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
         XCTAssertEqual(sut.isShowingLoadingIndicator, true, "Expected loading indicator once user initiates a reload")
 
         loader.completeFeedLoadingWithError(at: 1)
@@ -64,7 +65,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
         
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
         loader.completeFeedLoading(with: [image0, image1, image2, image3], at: 1)
         assertThat(sut, isRendering: [image0, image1, image2, image3])
     }
@@ -77,7 +78,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
         
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
         loader.completeFeedLoadingWithError(at: 1)
         assertThat(sut, isRendering: [image0])
     }
@@ -301,7 +302,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
 
         loader.completeFeedLoadingWithError(at: 0)
-        XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
+        XCTAssertEqual(sut.errorMessage, loadError)
     }
 
     func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
@@ -311,9 +312,22 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
 
         loader.completeFeedLoadingWithError(at: 0)
-        XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
+        XCTAssertEqual(sut.errorMessage, loadError)
 
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+
+    func test_tapOnErrorView_hidesErrorMessage() {
+        let (sut, loader) = makeSUT()
+
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+
+        sut.simulateErrorViewTap()
         XCTAssertEqual(sut.errorMessage, nil)
     }
 
@@ -326,22 +340,41 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [image0, image1], at: 0)
         assertThat(sut, isRendering: [image0, image1])
 
-        sut.simulateUserInitiaderFeedReload()
+        sut.simulateUserInitiaderReload()
         loader.completeFeedLoading(with: [], at: 1)
         assertThat(sut, isRendering: [])
+    }
+
+    func test_imageSelection_notifiesHandler() {
+        let image0 = makeImage()
+        let image1 = makeImage()
+        var selectedImages = [FeedImage]()
+        let (sut, loader) = makeSUT(selection: { selectedImages.append($0) })
+
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(with: [image0, image1], at: 0)
+        assertThat(sut, isRendering: [image0, image1])
+
+        XCTAssertEqual(selectedImages, [])
+        
+        sut.simulateTapOnFeedImage(at: 0)
+        XCTAssertEqual(selectedImages, [image0])
+        
+        sut.simulateTapOnFeedImage(at: 1)
+        XCTAssertEqual(selectedImages, [image0, image1])
     }
     
     // MARK: - Helpers
 
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
+    private func makeSUT(selection: @escaping (FeedImage) -> Void = { _ in }, file: StaticString = #file, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader.loadPublisher, imageLoader: loader.loadImageDataPublisher)
+        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader.loadPublisher, imageLoader: loader.loadImageDataPublisher, selection: selection)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
     }
 
-    private func assertThat(_ sut: FeedViewController, isRendering feed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
+    private func assertThat(_ sut: ListViewController, isRendering feed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
         sut.tableView.layoutIfNeeded()
         executeRunLoopToCleanUpReferences()
         guard sut.numberOfRenderedFeedImageViews() == feed.count else {
@@ -354,7 +387,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         executeRunLoopToCleanUpReferences()
     }
 
-    private func assertThat(_ sut: FeedViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #file, line: UInt = #line) {
+    private func assertThat(_ sut: ListViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #file, line: UInt = #line) {
         let view = sut.feedImageView(at: index)
         
         guard let cell = view as? FeedImageCell else {
@@ -380,66 +413,27 @@ final class FeedUIIntegrationTests: XCTestCase {
     private func executeRunLoopToCleanUpReferences() {
         RunLoop.current.run(until: Date())
     }
-    
-    class LoaderSpy: FeedLoader, FeedImageDataLoader {
-        
-        // MARK: - FeedLoader
-        
-        private var feedRequests = [(FeedLoader.Result) -> Void]()
-        
-        var loadFeedCallCount: Int {
-            return feedRequests.count
-        }
-    
-        func load(completion: @escaping (FeedLoader.Result) -> Void) {
-            feedRequests.append(completion)
-        }
-    
-        func completeFeedLoading(with feed: [FeedImage] = [], at index: Int) {
-            feedRequests[index](.success(feed))
-        }
-
-        func completeFeedLoadingWithError(at index: Int) {
-            let error = NSError(domain: "an error", code: 0)
-            feedRequests[index](.failure(error))
-        }
-        
-        // MARK: - FeedImageDataLoader
-        
-        private struct TaskSpy: FeedImageDataLoaderTask {
-            let cancelCallback: () -> Void
-            
-            func cancel() {
-                cancelCallback()
-            }
-        }
-        
-        private var imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
-        private(set) var cancelledImageURLs = [URL]()
-
-        var loadedImageURLs: [URL] {
-            return imageRequests.map { $0.url }
-        }
-
-        func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-            imageRequests.append((url, completion))
-            return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
-        }
-
-        func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
-            imageRequests[index].completion(.success(imageData))
-        }
-
-        func completeImageLoadingWithError(at index: Int) {
-            let error = NSError(domain: "any error", code: 0)
-            imageRequests[index].completion(.failure(error))
-        }
-    }
 }
 
-extension FeedViewController {
-    func simulateUserInitiaderFeedReload() {
+extension ListViewController {
+    public override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        
+        tableView.frame = .init(x: 0, y: 0, width: 1, height: 1)
+    }
+    
+    func simulateUserInitiaderReload() {
         refreshControl?.simulatePullToRefresh()
+    }
+
+    func simulateTapOnFeedImage(at row: Int) {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedImageSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
+    }
+
+    func simulateErrorViewTap() {
+        errorView.simulateTap()
     }
 
     @discardableResult
@@ -480,7 +474,11 @@ extension FeedViewController {
     }
 
     func numberOfRenderedFeedImageViews() -> Int {
-        return tableView.numberOfRows(inSection: feedImageSection)
+        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImageSection)
+    }
+
+    func numberOfRenderedComments() -> Int {
+        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: commentsSection)
     }
 
     func feedImageView(at row: Int) -> UITableViewCell? {
@@ -492,13 +490,39 @@ extension FeedViewController {
         let index = IndexPath(row: row, section: feedImageSection)
         return ds?.tableView(tableView, cellForRowAt: index)
     }
+
+    func commentMessage(at row: Int) -> String? {
+        commentView(at: row)?.messageLabel.text
+    }
+
+    func commentDate(at row: Int) -> String? {
+        commentView(at: row)?.dateLabel.text
+    }
+
+    func commentUsername(at row: Int) -> String? {
+        commentView(at: row)?.usernameLabel.text
+    }
+
+    private func commentView(at row: Int) -> ImageCommentCell? {
+        guard numberOfRenderedComments() > row else {
+            return nil
+        }
+        
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: commentsSection)
+        return ds?.tableView(tableView, cellForRowAt: index) as? ImageCommentCell
+    }
     
     private var feedImageSection: Int {
         return 0
     }
 
+    private var commentsSection: Int {
+        return 0
+    }
+
     var errorMessage: String? {
-        return errorView?.message
+        return errorView.message
     }
 }
 
@@ -550,15 +574,3 @@ private extension UIRefreshControl {
         }
     }
 }
-
-private extension UIImage {
-     static func make(withColor color: UIColor) -> UIImage {
-         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-         let format = UIGraphicsImageRendererFormat()
-         format.scale = 1
-         return UIGraphicsImageRenderer(size: rect.size, format: format).image { rendererContext in
-             color.setFill()
-             rendererContext.fill(rect)
-         }
-     }
- }
