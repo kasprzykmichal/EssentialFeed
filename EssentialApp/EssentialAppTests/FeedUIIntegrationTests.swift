@@ -36,6 +36,18 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadFeedCallCount, 3, "Expected a third loading request once user initiates a load")
     }
 
+    func test_loadMoreActions_requestMoreFromLoader() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(at: 0)
+        
+        XCTAssertEqual(loader.loadMoreCallCount, 0, "Expected no requests until load more action")
+
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(loader.loadMoreCallCount, 1, "Expected one load more request")
+    }
+
     func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
         let (sut, loader) = makeSUT()
         
@@ -469,6 +481,19 @@ extension ListViewController {
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
     }
 
+    func simulateLoadMoreFeedAction() {
+        guard let view = cell(row: 0, section: feedLoadMoreSection) else { return }
+        let delegate = tableView.delegate
+        let index = IndexPath(row: 0, section: feedLoadMoreSection)
+        delegate?.tableView?(tableView, willDisplay: view, forRowAt: index)
+    }
+
+    private func cell(row: Int, section: Int) -> UITableViewCell? {
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: section)
+        return ds?.tableView(tableView, cellForRowAt: index)
+    }
+
     var isShowingLoadingIndicator: Bool {
         return refreshControl?.isRefreshing == true
     }
@@ -515,6 +540,10 @@ extension ListViewController {
     
     private var feedImageSection: Int {
         return 0
+    }
+
+    private var feedLoadMoreSection: Int {
+        return 1
     }
 
     private var commentsSection: Int {
