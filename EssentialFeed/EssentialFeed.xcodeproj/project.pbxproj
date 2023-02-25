@@ -56,6 +56,9 @@
 		203D262829A9FAA20087DC22 /* FEED_WITH_LOAD_MORE_INDICATOR_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 203D262129A9FAA20087DC22 /* FEED_WITH_LOAD_MORE_INDICATOR_dark.png */; };
 		203D262929A9FAA20087DC22 /* FEED_WITH_CONTENT_dark_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 203D262229A9FAA20087DC22 /* FEED_WITH_CONTENT_dark_extraExtraExtraLarge.png */; };
 		203D262B29A9FD660087DC22 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203D262A29A9FD660087DC22 /* LoadMoreCell.swift */; };
+		203D262E29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 203D262C29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark.png */; };
+		203D262F29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 203D262D29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_light.png */; };
+		203D263129A9FF9C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 203D263029A9FF9C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark_extraExtraExtraLarge.png */; };
 		203EF210296CD73C00431931 /* ImageCommentsMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EF20F296CD73C00431931 /* ImageCommentsMapperTests.swift */; };
 		203EF214296CD88D00431931 /* ImageCommentsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EF213296CD88D00431931 /* ImageCommentsMapper.swift */; };
 		203EF217296CDD3B00431931 /* ImageComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EF216296CDD3B00431931 /* ImageComment.swift */; };
@@ -248,6 +251,9 @@
 		203D262129A9FAA20087DC22 /* FEED_WITH_LOAD_MORE_INDICATOR_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_INDICATOR_dark.png; sourceTree = "<group>"; };
 		203D262229A9FAA20087DC22 /* FEED_WITH_CONTENT_dark_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_CONTENT_dark_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		203D262A29A9FD660087DC22 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
+		203D262C29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_ERROR_dark.png; sourceTree = "<group>"; };
+		203D262D29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_ERROR_light.png; sourceTree = "<group>"; };
+		203D263029A9FF9C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_ERROR_dark_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		203EF20F296CD73C00431931 /* ImageCommentsMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapperTests.swift; sourceTree = "<group>"; };
 		203EF213296CD88D00431931 /* ImageCommentsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapper.swift; sourceTree = "<group>"; };
 		203EF216296CDD3B00431931 /* ImageComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageComment.swift; sourceTree = "<group>"; };
@@ -565,6 +571,9 @@
 				203D262029A9FAA20087DC22 /* FEED_WITH_FAILED_IMAGE_LOADING_light.png */,
 				203D262129A9FAA20087DC22 /* FEED_WITH_LOAD_MORE_INDICATOR_dark.png */,
 				203D262229A9FAA20087DC22 /* FEED_WITH_CONTENT_dark_extraExtraExtraLarge.png */,
+				203D262C29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark.png */,
+				203D262D29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_light.png */,
+				203D263029A9FF9C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark_extraExtraExtraLarge.png */,
 			);
 			path = snapshots;
 			sourceTree = "<group>";
@@ -1200,9 +1209,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				203D262F29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_light.png in Resources */,
 				203D262329A9FAA20087DC22 /* FEED_WITH_FAILED_IMAGE_LOADING_dark.png in Resources */,
 				203D262929A9FAA20087DC22 /* FEED_WITH_CONTENT_dark_extraExtraExtraLarge.png in Resources */,
 				203D262729A9FAA20087DC22 /* FEED_WITH_FAILED_IMAGE_LOADING_light.png in Resources */,
+				203D263129A9FF9C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark_extraExtraExtraLarge.png in Resources */,
+				203D262E29A9FF8C0087DC22 /* FEED_WITH_LOAD_MORE_ERROR_dark.png in Resources */,
 				203D262629A9FAA20087DC22 /* FEED_WITH_LOAD_MORE_INDICATOR_light.png in Resources */,
 				203D262529A9FAA20087DC22 /* FEED_WITH_CONTENT_light.png in Resources */,
 				203D262829A9FAA20087DC22 /* FEED_WITH_LOAD_MORE_INDICATOR_dark.png in Resources */,
