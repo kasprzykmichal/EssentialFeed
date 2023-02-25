@@ -389,6 +389,22 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
 
+    func test_loadMoreCompletion_rendersErrorMessageOnError() {
+        let (sut, loader) = makeSUT()
+
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(at: 0)
+        sut.simulateLoadMoreFeedAction()
+        
+        XCTAssertEqual(sut.loadMoreErrorMessage, nil)
+
+        loader.completeLoadMoreWithError(at: 0)
+        XCTAssertEqual(sut.loadMoreErrorMessage, loadError)
+
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(sut.loadMoreErrorMessage, nil)
+    }
+
     func test_tapOnErrorView_hidesErrorMessage() {
         let (sut, loader) = makeSUT()
 
@@ -625,6 +641,11 @@ extension ListViewController {
 
     var errorMessage: String? {
         return errorView.message
+    }
+
+    var loadMoreErrorMessage: String? {
+        let view = cell(row: 0, section: feedLoadMoreSection) as? LoadMoreCell
+        return view?.message
     }
 }
 
