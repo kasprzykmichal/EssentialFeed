@@ -8,22 +8,32 @@
 import UIKit
 import Combine
 import EssentialFeed
+import EssentialFeedAPI
 import EssentialFeediOS
 
 public final class FeedUIComposer {
     private init() { }
     
-    public static func feedComposedWith(feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>, imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher, selection: @escaping (FeedImage) -> Void = { _ in }) -> ListViewController {
-        let presentationAdapter = LoadResourcePresentationAdapter<[FeedImage],FeedViewAdapter>(loader: { feedLoader().dispatchOnMainQueue() })
+    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<Paginated<FeedImage>, FeedViewAdapter>
+    
+    public static func feedComposedWith(
+        feedLoader: @escaping () -> AnyPublisher<Paginated<FeedImage>, Error>,
+        imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher,
+        selection: @escaping (FeedImage) -> Void = { _ in }) -> ListViewController {
+            
+        let presentationAdapter = FeedPresentationAdapter(loader: { feedLoader().dispatchOnMainQueue() })
         
         let feedController = ListViewController.makeWith(title: FeedPresenter.title)
         feedController.onRefresh = presentationAdapter.loadResource
         
         presentationAdapter.presenter = LoadResourcePresenter(
-            resourceView: FeedViewAdapter(controller: feedController, imageLoader: { imageLoader($0).dispatchOnMainQueue() }, selection: selection),
+            resourceView: FeedViewAdapter(
+                controller: feedController,
+                imageLoader: { imageLoader($0).dispatchOnMainQueue() },
+                selection: selection),
             loadingView: WeakRefVirtualProxy(feedController),
             errorView: WeakRefVirtualProxy(feedController),
-            mapper: FeedPresenter.map)
+            mapper: { $0 })
         
         return feedController
     }
