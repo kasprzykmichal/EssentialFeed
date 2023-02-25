@@ -557,7 +557,7 @@ extension ListViewController {
     }
 
     func renderedFeedImageData(at index: Int) -> Data? {
-        return simulateFeedImageViewVisible(at: 0)?.renderedImage
+        return simulateFeedImageViewVisible(at: index)?.renderedImage
     }
     
     @discardableResult
@@ -668,8 +668,16 @@ extension ListViewController {
     }
 
     var loadMoreErrorMessage: String? {
+        return loadMoreFeedCell()?.message
+    }
+
+    private func loadMoreFeedCell() -> LoadMoreCell? {
         let view = cell(row: 0, section: feedLoadMoreSection) as? LoadMoreCell
-        return view?.message
+        return view
+    }
+
+    var canLoadMoreFeed: Bool {
+        return loadMoreFeedCell() != nil
     }
 }
 
