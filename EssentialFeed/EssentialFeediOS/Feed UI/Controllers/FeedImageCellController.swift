@@ -19,6 +19,7 @@ public final class FeedImageCellController: NSObject {
     private let delegate: FeedImageCellControllerDelegate
     private let selection: () -> Void
     private var cell: FeedImageCell?
+    private var isLoading = false
     
     public init(viewModel: FeedImageViewModel, delegate: FeedImageCellControllerDelegate, selection: @escaping () -> Void) {
         self.viewModel = viewModel
