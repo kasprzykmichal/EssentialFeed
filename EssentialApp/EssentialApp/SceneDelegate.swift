@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         do {
             return try CoreDataFeedStore(storeURL: NSPersistentContainer.defaultDirectoryURL().appendingPathExtension("feed-store.sqlite"))
         } catch {
+            assertionFailure("Failed to instanciate CoreData store with error: \(error.localizedDescription)")
             return NullStore()
         }
         
