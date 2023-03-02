@@ -5,6 +5,7 @@
 //  Created by Michał Kasprzyk on 27/12/2022.
 //
 
+import os
 import UIKit
 import Combine
 import CoreData
@@ -18,11 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
     
+    private lazy var logger = Logger(subsystem: "com.kasprzykmichal.EssentialApp", category: "main")
+    
     private lazy var store: FeedStore & FeedImageDataStore = {
         do {
             return try CoreDataFeedStore(storeURL: NSPersistentContainer.defaultDirectoryURL().appendingPathExtension("feed-store.sqlite"))
         } catch {
             assertionFailure("Failed to instanciate CoreData store with error: \(error.localizedDescription)")
+            logger.fault("Failed to instanciate CoreData store with error: \(error.localizedDescription)")
             return NullStore()
         }
         
