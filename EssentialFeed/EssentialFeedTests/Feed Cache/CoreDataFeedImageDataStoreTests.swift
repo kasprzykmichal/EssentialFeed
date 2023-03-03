@@ -42,7 +42,6 @@ final class CoreDataFeedImageDataStoreTests: XCTestCase {
 
         insert(firstStoredData, for: url, into: sut)
         insert(lastStoredData, for: url, into: sut)
-
         expect(sut, toCompleteRetrievalWith: found(lastStoredData), for: url)
     }
 
