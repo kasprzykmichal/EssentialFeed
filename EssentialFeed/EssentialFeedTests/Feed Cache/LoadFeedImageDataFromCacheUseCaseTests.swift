@@ -75,7 +75,7 @@ final class LoadFeedImageDataFromCacheUseCaseTests: XCTestCase {
     private func expect(_ sut: LocalFeedImageDataLoader, toCompleteWith expectedResult: Result<Data, Error>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         action()
         
-        var receivedResult = Result { try sut.loadImageData(from: anyURL()) }
+        let receivedResult = Result { try sut.loadImageData(from: anyURL()) }
         
         switch (receivedResult, expectedResult) {
         case let (.success(receivedData), .success(expectedData)):
